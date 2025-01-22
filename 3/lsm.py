@@ -38,22 +38,3 @@ def least_square_method(x, y, degree):
     print(coefficients)
     return coefficients, ssr, partial_derivatives
 
-def gaussian_elimination(A, b):
-    n = len(b)
-    for i in range(n):
-        factor = A[i][i]
-        for j in range(i, n):
-            A[i][j] /= factor
-        b[i] /= factor
-        
-        for k in range(n):
-            if k != i:
-                factor = A[k][i]
-                for j in range(i, n):
-                    A[k][j] -= factor * A[i][j]
-                b[k] -= factor * b[i]
-    
-    return b
-
-
-
