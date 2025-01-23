@@ -1,40 +1,86 @@
+import numpy as np
 from gauss import gauss
+def polynomial(x, coefficients, start, gap):
+    summ = 0
+    i = 0
+    p = start
+    while i < len(coefficients):
+        if p not in gap:
+            summ += coefficients[i] * x**p
+            i += 1
+        p += 1
+    return summ
 
-def polynomial(x,k):
-    y=0
-    for i in range(len(k)):
-        y += k[i]*x**i
-    return y
 
-def least_square_method(x, y, degree):
+def least_square_method(x, y, degree, start=0, degrees = []):
+    X = []
     n = len(x)
+
+    for xi in x:
+        t = []
+        for i in range(start,degree+1):
+            if i not in degrees:
+                print("i",i)
+                t.append(xi**i)
+        X.append(t)
+    print("X")
     
-    X = [[xi**j for j in range(degree + 1)] for xi in x]
+    r =len(X[0])
+
     for i in range(n):
         print(X[i])
-    
-    Xt = [[X[j][i] for j in range(n)] for i in range(degree + 1)]
+
+    print(len(X),len(degrees),n)
+    Xt = []
+
+    for i in range(len(X[0])):
+        t = []
+        for j in range(n):
+            t.append(X[j][i])
+        Xt.append(t)
+            
     print("Xt")
-    for i in range(degree + 1):
+
+    for i in range(len(Xt)):
         print(Xt[i])
-    
-    XtX = [[sum(Xt[i][k] * X[k][j] for k in range(n)) for j in range(degree + 1)] for i in range(degree + 1)]
-    for i in range(degree + 1):
+    print("XtX")
+
+    XtX = []
+
+    for i in range(start, r+start ):
+        t = []
+        for j in range(start, r +start ):
+            summ = 0
+            for k in range(n):
+                summ += Xt[i][k] * X[k][j]
+            t.append(summ)
+        XtX.append(t)
+
+    for i in range(len(XtX)):
         print(XtX[i])
-    print("XtY")
-    XtY = [sum(Xt[i][j] * y[j] for j in range(n)) for i in range(degree + 1)]
-    for i in range(degree + 1):
+    XtY = []
+    for i in range(start, r+start):
+        summ = 0
+        for j in range(n):
+            summ += Xt[i][j] * y[j]
+        XtY.append(summ)
+
+    for i in range(len(XtY)):
         print(XtY[i])
-    coefficients = gauss(XtX, XtY)
     
-    y_pred = [polynomial(xi, coefficients) for xi in x]
+    coefficients = gauss(XtX, XtY)
+    c = []
+    for i in range(len(coefficients)):
+        c.insert(0,coefficients[i])
+
+    y_pred = [polynomial(xi, coefficients , start, degrees) for xi in x]
     residuals = [y[i] - y_pred[i] for i in range(n)]
     ssr = sum(residuals[i]**2 for i in range(n))
     
-    partial_derivatives = []
-    for i in range(degree + 1):
-        dS_dBeta = -2 * sum(X[j][i] * residuals[j] for j in range(n))
-        partial_derivatives.insert(0,dS_dBeta)
-    print(coefficients)
-    return coefficients, ssr, partial_derivatives
+    if start<0:
+        print("c",c)
+        return c
 
+    else:
+        print("coefficients",coefficients)
+        return coefficients
