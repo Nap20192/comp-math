@@ -8,7 +8,7 @@ if __name__ == "__main__":
     degrees = [1,2,3,4]
     start = 0
     r = []
-    count = 0
+    count = 1
     plt.scatter(x, y, color='black', label='Data points')
 
     for degree in degrees:
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
             plt.plot(x_fit, y_fit, label=f'Degree {degree} / Gap {gap}')
     print()
-    print(f"Best fit: {r.index(min(r))}")
+    print(f"Best fit: {r.index(min(r))+1}")
     plt.grid()
     plt.xlabel('x')
     plt.ylabel('y')

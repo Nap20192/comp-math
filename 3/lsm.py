@@ -22,8 +22,7 @@ def least_square_method(x, y, degree, start=0, degrees = [],i_var = 0):
             if i not in degrees:
                 t.append(xi**i)
         X.append(t + [1] * i_var)
-    for i in X:
-        print (i)
+
 
     r =len(X[0])
 
@@ -49,18 +48,23 @@ def least_square_method(x, y, degree, start=0, degrees = [],i_var = 0):
                 s += Xt[i][k] * X[k][j]
             t.append(s)
         XtX.append(t)
-    
+    """
+    for i in X:
+        print (i)
     print()
     for i in XtX:
         print(i)
+    for i in XtY:
+        print(i)
+    """
+
     XtY = []
     for i in range(start, r+start):
         s = 0
         for j in range(n):
             s += Xt[i][j] * y[j]
         XtY.append(s)
-    for i in XtY:
-        print(i)
+    
 
     coefficients = gauss(XtX, XtY)
     c = []
