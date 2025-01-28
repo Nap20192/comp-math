@@ -6,17 +6,34 @@ def fact(n):
     return f;
 
 
-def forward_diff(x, y,n,h, x0):
-    p = (x0 - x[0]) / h
+def forward_diff(y):
     for i in range(1,len(y)):
-        y[i] = y[i] - y[i - 1];
+        y[i-1] =  y[i] - y[i - 1];
+    y.pop()
+    print(y)
     return y[0]
 
-def newton_forward(x, y, n, x0, h):
-    sum = 0;
-    u = (x0 - x[0]) / h;
+def newton_forward(x, y, n, x0):
+    sum = y[0];
+    h=(x[1] - x[0])
+    u = (x0 - x[0]);
     for i in range(1, n):
-        sum = sum + (forward_diff(x, y, i, h, x[0]) * u) / fact(i);
-        u *= (u - x[i-1]);
+        sum = sum + (forward_diff(y) * u) / (fact(i)*h**i);
+        u *= (x0 - x[i]);
     return sum;
 
+def forward_diffs(y):
+    diffs = [y]  
+    while len(y) > 1:
+        y = [y[i] - y[i - 1] for i in range(1, len(y))]
+        diffs.append(y)
+    for i in range(len(diffs)):
+        for j in range(1,len(diffs[i])+1):
+            print(f"{i}^y{j}: {diffs[i][j - 1]}", end=" ")
+        print()
+    return diffs
+
+def missing(y):
+    n=len(y)
+    d = forward_diffs(y)
+    return(d[-1][0]/(n-1))

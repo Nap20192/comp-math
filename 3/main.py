@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
     x = [1, 2, 3, 4, 5]
     y = [1.8, 5.1, 8.9, 14.1, 19.8]
-    gaps = [[0],[1]]
-    degrees = [1,2,3,4]
+    degrees = [1,2,3]
+    gaps = [[],[1,2]]
     start = 0
     r = []
     count = 1
