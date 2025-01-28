@@ -1,10 +1,10 @@
-from newtonForward import newton_forward,forward_diffs
+from newtonForward import newton_forward,forward_diffs,missing
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     x = [10,20,30,40]
-    y = [1.1,2,4.4,7.9]
+    y = [1.1,2,0,7.9]
     x0 = 25
     n = len(x)
     forward_diffs(y)
-    print(newton_forward(x,y,n,x0))
+    print(missing(y))

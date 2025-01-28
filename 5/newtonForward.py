@@ -24,16 +24,20 @@ def newton_forward(x, y, n, x0):
 
 def forward_diffs(y):
     diffs = [y]  
+    print()
+    print("DIFF TABLE")
     while len(y) > 1:
         y = [y[i] - y[i - 1] for i in range(1, len(y))]
         diffs.append(y)
     for i in range(len(diffs)):
         for j in range(1,len(diffs[i])+1):
-            print(f"{i}^y{j}: {diffs[i][j - 1]}", end=" ")
+            print(f"{i+1}^y{j}: {round(diffs[i][j - 1],2)}", end=" ")
         print()
     return diffs
 
 def missing(y):
     n=len(y)
     d = forward_diffs(y)
-    return(d[-1][0]/(n-1))
+    print()
+    print("MISSING ITEM")
+    return round((d[-1][0]/(n-1)),1)
