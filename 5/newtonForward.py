@@ -10,10 +10,10 @@ def forward_diff(y):
     for i in range(1,len(y)):
         y[i-1] =  y[i] - y[i - 1];
     y.pop()
-    print(y)
     return y[0]
 
-def newton_forward(x, y, n, x0):
+def newton_forward(x, yy, n, x0):
+    y = yy.copy()
     sum = y[0];
     h=(x[1] - x[0])
     u = (x0 - x[0]);
