@@ -1,4 +1,4 @@
-from newtonForward import newton_forward,forward_diffs,missing
+from newtonForward import newton_forward,diffs_table,missing
 def polynomial(x, coefficients, start, gap):
     s = 0
     i = 0

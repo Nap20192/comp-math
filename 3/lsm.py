@@ -25,7 +25,8 @@ def least_square_method(x, y, degree, start=0, degrees = [],i_var = 0):
 
 
     r =len(X[0])
-
+    for i in (X):
+        print(i)
 
     Xt = []
 
@@ -34,7 +35,8 @@ def least_square_method(x, y, degree, start=0, degrees = [],i_var = 0):
         for j in range(n):
             t.append(X[j][i])
         Xt.append(t)
-            
+    for i in (Xt):
+        print(i)
 
  
 
